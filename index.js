@@ -1,6 +1,8 @@
 import  'dotenv/config';
 import  express from 'express';
 import connectdb from './confiq/confiq.js';
+import path from "path";
+
 
 const app = express();
 
@@ -320,11 +322,10 @@ res.status(200).json({recipes});
 
 
 
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`server is running ${PORT}`));
+}
 
 
-
-
-
-
-
-app.listen(process.env.PORT || 5000 , () => console.log(`server is running ${process.env.PORT}`))
+export default app;
