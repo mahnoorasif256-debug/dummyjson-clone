@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation Portal</title>
+
+  <!-- fontawesome cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- bootstrap cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="/style.css">
+
+
+</head>
+<body style="background-color:#e9e2ff ;">
+  <%- include('./header') %>
+
+  <%
+    const resources = [
+      {
+        key: 'posts',
+        title: 'Posts',
+        singular: 'post',
+        icon: '📰',
+        desc: 'Returns a list of posts from your backend.'
+      },
+      {
+        key: 'products',
+        title: 'Products',
+        singular: 'product',
+        icon: '🛍️',
+        desc: 'Returns a list of products from your backend.'
+      },
+      {
+        key: 'users',
+        title: 'Users',
+        singular: 'user',
+        icon: '👥',
+        desc: 'Returns a list of users from your backend.'
+      },
+      {
+        key: 'recipes',
+        title: 'Recipes',
+        singular: 'recipe',
+        icon: '🍳',
+        desc: 'Returns a list of recipes from your backend.'
+      }
+    ];
+  %>
+
+  <div class="docs-container">
+    <div class="row g-4">
+
+      <!-- ========== MAIN CONTENT (LEFT) ========== -->
+      <div class="col-lg-9">
+
+        <!-- Documentation Portal Header -->
+        <section id="portal" class="doc-panel">
+          <span class="portal-tag">REST API Guide</span>
+          <h1 class="h2 fw-bold mb-2" style="color: var(--ink-black);">API Documentation Portal</h1>
+          <p class="mb-0" style="color: var(--ink-charcoal);">
+            Comprehensive documentation for all available API endpoints. Use the live <b>fetch()</b> examples below or click <b>Try it now</b> to inspect real responses from your backend.
+          </p>
+
+          <div class="base-url-box">
+            <div>
+              <strong>Base URL:</strong> <span id="baseUrlText"></span>
+            </div>
+            <button type="button" class="btn-copy-light" onclick="copyBaseUrl(this)" onmouseleave="resetCopyBtn(this)">Copy URL</button>
+          </div>
+        </section>
+
+        <!-- Resource Cards -->
+        <% resources.forEach(r => { %>
+        <section id="<%= r.key %>" class="doc-panel api-card" data-path="/api/<%= r.key %>">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h2 class="h4 fw-bold mb-0" style="color: var(--ink-black);"><%= r.icon %> <%= r.title %> Endpoints</h2>
+            <span class="badge-rest">REST / GET</span>
+          </div>
+          <hr>
+
+          <!-- GET All -->
+          <div class="endpoint-bar">
+            <div><span class="badge-get">GET</span> <code>/api/<%= r.key %></code></div>
+            <button type="button" class="btn-try" onclick="tryCollection(this)">▶ Try it now</button>
+          </div>
+          <p class="mt-3" style="color: var(--ink-charcoal);"><%= r.desc %></p>
+
+          <!-- Live Collection Response -->
+          <div class="live">
+            <div class="live-top">
+              <span class="status"></span>
+              <a href="#" onclick="closeBox(this, '.live'); return false;" style="color: var(--ink-black); font-weight: 600;">Close ✕</a>
+            </div>
+            <div class="snippet-card">
+              <div class="snippet-head">
+                <span class="snippet-title">Live Response: <%= r.title %></span>
+                <span class="badge bg-secondary font-monospace">GET /api/<%= r.key %></span>
+              </div>
+              <div class="snippet-body">
+                <pre class="live-json-pre"><code class="live-out"></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fetch Code Example + Live Preview -->
+          <div class="row g-3 mt-2 equal-row">
+            <div class="col-md-6">
+              <div class="snippet-card">
+                <div class="snippet-head">
+                  <span class="snippet-title">Example: Fetching <%= r.title %></span>
+                  <span class="badge bg-secondary font-monospace">GET /api/<%= r.key %></span>
+                </div>
+                <div class="snippet-body">
+                  <pre><code class="fetch-snippet" data-raw=""></code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="snippet-card">
+                <div class="snippet-head">
+                  <span class="snippet-title">Live Server Preview (50 Items)</span>
+                  <span class="badge bg-secondary font-monospace">GET /api/<%= r.key %></span>
+                </div>
+                <div class="snippet-body">
+                  <pre class="live-json-pre"><code class="server-preview">// Loading from /api/<%= r.key %>...</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GET Single by ID -->
+          <div class="endpoint-bar mt-4">
+            <div>
+              <span class="badge-get">GET</span> <code>/api/<%= r.key %>/</code> id =
+           <input type="number" class="in-id id-input" value="1" min="1" oninput="this.closest('.endpoint-bar').querySelector('.try-id').textContent = this.value || 1">
+            </div>
+          <button type="button" class="btn-try" onclick="tryById(this)">▶ Try /api/<%= r.key %>/<span class="try-id">1</span></button>
+          </div>
+          <p class="mt-3 mb-0" style="color: var(--ink-charcoal);">Returns a single <%= r.singular %> matched by ID.</p>
+
+          <!-- Live Single ID Response -->
+          <div class="live-id">
+            <div class="live-top">
+              <span class="status"></span>
+              <a href="#" onclick="closeBox(this, '.live-id'); return false;" style="color: var(--ink-black); font-weight: 600;">Close ✕</a>
+            </div>
+            <div class="snippet-card">
+              <div class="snippet-head">
+                <span class="snippet-title">Live Response: Single <%= r.title.slice(0, -1) %></span>
+                <span class="badge bg-secondary font-monospace">GET /api/<%= r.key %>/:id</span>
+              </div>
+              <div class="snippet-body">
+                <pre class="live-json-pre"><code class="live-out"></code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+        <% }) %>
+
+      </div>
+
+      <!-- ========== RIGHT SIDEBAR ========== -->
+      <div class="col-lg-3">
+        <aside class="right-sidebar">
+          <small>API REFERENCE</small>
+          <a href="#portal" class="active">Overview</a>
+          <% resources.forEach(r => { %>
+            <a href="#<%= r.key %>"><%= r.title %> API</a>
+          <% }) %>
+        </aside>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const baseApiUrl = `${window.location.origin}/api`;
+    document.getElementById("baseUrlText").textContent = baseApiUrl;
+
+    async function copyBaseUrl(btn) {
+      await navigator.clipboard.writeText(baseApiUrl);
+      btn.textContent = "Copied!";
+      btn.classList.add("is-copied");
+    }
+
+    function resetCopyBtn(btn) {
+      btn.textContent = "Copy URL";
+      btn.classList.remove("is-copied");
+    }
+
+    function renderSnippet(card) {
+      const fullUrl = `${window.location.origin}${card.dataset.path}`;
+      const raw = `fetch('${fullUrl}')\n  .then(res => res.json())\n  .then(data => console.log(data));`;
+      const html =
+        `<span class="text-danger">fetch</span>(<span class="text-success">'${fullUrl}'</span>)\n` +
+        `  .<span class="text-primary">then</span>(res =&gt; res.<span class="text-primary">json</span>())\n` +
+        `  .<span class="text-primary">then</span>(data =&gt; console.<span class="text-primary">log</span>(data));`;
+
+      const codeEl = card.querySelector(".fetch-snippet");
+      codeEl.dataset.raw = raw;
+      codeEl.innerHTML = html;
+    }
+
+    async function parseApiResponse(url) {
+      const res = await fetch(url);
+      const rawText = await res.text();
+      try {
+        return { ok: res.ok, status: res.status, formatted: JSON.stringify(JSON.parse(rawText), null, 2) };
+      } catch {
+        return {
+          ok: false,
+          status: res.status,
+          formatted: `// Endpoint returned non-JSON (HTTP ${res.status}):\n${rawText.slice(0, 400)}`
+        };
+      }
+    }
+
+    async function callEndpoint(card, boxSelector, url) {
+      const box = card.querySelector(boxSelector);
+      const statusEl = box.querySelector(".status");
+      const outEl = box.querySelector(".live-out");
+
+      box.style.display = "block";
+      statusEl.textContent = "Loading...";
+      statusEl.className = "status";
+      outEl.textContent = "";
+
+      const started = performance.now();
+      try {
+        const result = await parseApiResponse(url);
+        const elapsed = Math.round(performance.now() - started);
+        statusEl.textContent = `Live Response (${result.status} • ${elapsed} ms)`;
+        statusEl.className = `status ${result.ok ? "status-ok" : "status-bad"}`;
+        outEl.textContent = result.formatted;
+      } catch (err) {
+        statusEl.textContent = "Request failed";
+        statusEl.className = "status status-bad";
+        outEl.textContent = err.message;
+      }
+    }
+
+    function tryCollection(btn) {
+      const card = btn.closest(".api-card");
+      callEndpoint(card, ".live", card.dataset.path);
+    }
+
+    function tryById(btn) {
+      const card = btn.closest(".api-card");
+      const id = card.querySelector(".in-id").value || 1;
+      callEndpoint(card, ".live-id", `${card.dataset.path}/${encodeURIComponent(id)}`);
+    }
+
+    function closeBox(link, selector) {
+      link.closest(selector).style.display = "none";
+    }
+
+    async function loadServerPreview(card) {
+      const previewCode = card.querySelector(".server-preview");
+      try {
+        const result = await parseApiResponse(card.dataset.path);
+        previewCode.textContent = result.formatted;
+      } catch (err) {
+        previewCode.textContent = `// Preview error: ${err.message}`;
+      }
+    }
+
+    document.querySelectorAll(".api-card").forEach(card => {
+      renderSnippet(card);
+      loadServerPreview(card);
+    });
+
+   const sidebarLinks = document.querySelectorAll(".right-sidebar a");
+const sections = document.querySelectorAll("#portal, .api-card");
+
+function setActive(id) {
+  sidebarLinks.forEach(link => {
+    link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+  });
+}
+
+sidebarLinks.forEach(link => {
+  link.addEventListener("click", () => setActive(link.getAttribute("href").slice(1)));
+});
+
+function updateActiveOnScroll() {
+  let current = sections[0].id;
+  sections.forEach(sec => {
+    if (sec.getBoundingClientRect().top <= 140) current = sec.id;
+  });
+  if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 5) {
+    current = sections[sections.length - 1].id;
+  }
+  setActive(current);
+}
+
+window.addEventListener("scroll", updateActiveOnScroll);
+updateActiveOnScroll();
+  </script>
+
+  <%- include('./footer') %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

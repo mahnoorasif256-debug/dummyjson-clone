@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+         <!-- fontawesome cdn -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+          <!-- bootstrap cdn -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+          <!-- custom css -->
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<%- include('./header') %>
+
+<!-- hero sec start -->
+
+<div class="hero-wrap">
+<section class="hero-section py-5 my-3">
+  <div class="container">
+    <div class="row align-items-center gy-5 gx-lg-5">
+      <!-- Left Side: Content & Buttons -->
+      <div class="col-lg-6 text-lg-start text-center">
+       <h1 class="fw-bold display-4 mb-3 text-dark" style="font-weight: 800; line-height: 1.2;">
+          Dummy JSON API for Mocking Data ✨
+        </h1>
+        <p class="fs-5 fw-bold text-dark mb-2">
+          Develop, Build, Test.
+        </p>
+        <p class="text-black mt-3 w-100 fs-4">
+          Get instant dummy JSON data for your frontend with DummyJSON Server — no backend setup needed!
+        </p>
+        
+        <!-- Buttons -->
+        <div class="d-flex flex-wrap gap-3 justify-content-lg-start justify-content-center mt-5 mb-4">
+      <a href="https://github.com/mahnoorasif256-debug/dummyjson-clone"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="btn btn2 btn-github d-inline-flex align-items-center gap-2">
+  <i class="fa-brands fa-github fs-5"></i> View on GitHub
+</a>
+
+<a href="/docs"><button class="read">Read Docs</button></a>
+
+  </div>
+
+        <!-- Serving text -->
+        <p class="text-muted small">
+          Serving over <strong class="text-dark">500 million requests</strong> monthly! <i class="fa-solid fa-arrow-down ms-1"></i>
+        </p>
+      </div>
+
+      <!-- Right Side: Illustration Image + floating shapes -->
+      <div class="col-lg-6 text-center">
+        <div class="hero-art">
+
+          <div class="shape shape-card"><span></span><span></span></div>
+
+          <div class="shape shape-window">
+            <i class="dots"></i>
+            <span class="line"></span>
+            <span class="line" style="width: 65%;"></span>
+          </div>
+
+          <div class="shape shape-dot"></div>
+
+          <svg class="shape shape-tri" viewBox="0 0 44 40" fill="none">
+            <polygon points="22,3 41,37 3,37" stroke="#7b72e6" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="shape shape-square"></div>
+
+          <div class="shape shape-card shape-card-b"><span></span><span></span></div>
+
+          <img src="/images/2ima.png" alt="DummyJSON Illustration" class="img-fluid hero-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- hero sec end -->
+
+
+<!--  carsd start-->
+
+
+<div class="glow-right">
+<section class="container my-5">
+  <div class="mb-5 text-center">
+    <h1 class="fw-bold display-3 text-dark">Top Resources:</h1>
+    <p class="text-dark fs-5 mb-0">Access real-time mock data, fully organized and ready to use for your web applications.</p>
+  </div>
+
+  <div class="row g-4 mt-1">
+
+    <div class="col-md-6">
+      <a href="/api/products" target="_blank" class="res-card res-coral">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa-solid fa-headphones fs-1"></i>
+          <div>
+            <h3 class="h1 fw-bold mb-0">Products</h3>
+            <small class="font-serif opacity-75"><span class="site-url"></span>/api/products</small>
+          </div>
+        </div>
+        <span class="res-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <a href="/api/users" target="_blank" class="res-card res-purple">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa-regular fa-circle-user fs-1"></i>
+          <div>
+            <h3 class="h1 fw-bold mb-0">Users</h3>
+            <small class="font-serif opacity-75"><span class="site-url"></span>/api/users</small>
+          </div>
+        </div>
+        <span class="res-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <a href="/api/posts" target="_blank" class="res-card res-pink">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa-solid fa-pen-nib fs-1"></i>
+          <div>
+            <h3 class="h1 fw-bold mb-0">Posts</h3>
+            <small class="font-serif opacity-75"><span class="site-url"></span>/api/posts</small>
+          </div>
+        </div>
+        <span class="res-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="col-md-6">
+      <a href="/api/recipes" target="_blank" class="res-card res-teal">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa-solid fa-fire-flame-curved fs-1"></i>
+          <div>
+            <h3 class="h1 fw-bold mb-0">Recipes</h3>
+            <small class="font-serif opacity-75"><span class="site-url"></span>/api/recipes</small>
+          </div>
+        </div>
+        <span class="res-arrow">↗</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- cards end -->
+
+
+<!-- code box start -->
+
+<div class="glow-peach">
+<section class="container">
+
+  <!-- Center Heading -->
+  <div class="mb-5 text-center">
+    <h1 class="fw-bold display-3 text-dark">Quick Start</h1>
+    <p class="text-dark fs-5 mb-0">Start fetching data in seconds with just a single line of code.</p>
+  </div>
+
+  <div class="row align-items-center g-4">
+
+    <!-- Left Side: Code Box Card -->
+    <div class="col-lg-7">
+      <div class="card  border-secondary rounded-4 shadow-sm overflow-hidden" style="background-color: #222F3A;">
+        <!-- Code Box Header/Title Bar -->
+        <div class="card-header  bg-opacity-50 border-secondary px-4 py-3 d-flex justify-content-between align-items-center"  style="background-color: #222F3A;">
+          <span class="font-monospace small fs-5" style="color:  #adafb0;">Example: Fetching Products</span>
+          <span class="badge bg-secondary font-monospace fs-6">GET /api/products</span>
+        </div>
+        
+        <!-- Code Content -->
+        <div class="card-body p-5 px-5  pb-5  bg-opacity-25"  style="background-color: #222F3A;">
+          <pre class="mb-0 text-white font-monospace code-scroll" style="font-size: 18px; overflow-x: auto;"><code><span class="text-danger">fetch</span>(<span class="text-success">'<span class="site-url"></span>/api/products/1'</span>)
+  .<span class="text-primary">then</span>(res => res.<span class="text-primary">json</span>())
+  .<span class="text-primary">then</span>(data => console.<span class="text-primary">log</span>(data));</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Explanation / Text -->
+    <div class="col-lg-5">
+      <p class="text-muted mb-3 fs-5">
+        You can use any HTTP client or standard JavaScript <code class="text-info">fetch()</code> method to interact with this mock API service and retrieve data instantly.
+      </p>
+      <ul class="list-unstyled text-muted small mb-0">
+        <li class="mb-2" style="font-size: medium;"><i class="fa-solid fa-check" style="color: rgb(37, 218, 137);"></i> No authentication required for GET requests</li>
+        <li class="mb-2" style="font-size: medium;"><i class="fa-solid fa-check" style="color: rgb(37, 218, 137);"></i> Returns clean JSON formatted responses</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</div>
+
+
+<%- include('./footer') %>
+
+<!-- code box end -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+  document.querySelectorAll(".site-url").forEach(el => el.textContent = location.origin);
+</script>
+</body>
+</html>
